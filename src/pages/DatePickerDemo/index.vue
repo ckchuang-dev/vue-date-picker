@@ -1,8 +1,8 @@
 <script>
   export default {
-    name: "DatePickerDemo",
+    name: 'DatePickerDemo',
     components: {}
-  };
+  }
 </script>
 
 <template src="./template.html" />

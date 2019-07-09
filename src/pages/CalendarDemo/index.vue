@@ -1,13 +1,13 @@
 <script>
   // @ is an alias to /src
-  import Calendar from "@/components/Calendar";
+  import Calendar from '@/components/Calendar'
 
   export default {
-    name: "CalendarDemo",
+    name: 'CalendarDemo',
     components: {
       Calendar
     }
-  };
+  }
 </script>
 
 <template src="./template.html" />

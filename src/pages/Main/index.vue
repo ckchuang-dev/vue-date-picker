@@ -1,7 +1,7 @@
 <script>
   export default {
-    name: "Main"
-  };
+    name: 'Main'
+  }
 </script>
 
 <template src="./template.html" />
