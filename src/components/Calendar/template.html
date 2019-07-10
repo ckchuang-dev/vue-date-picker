@@ -1,3 +1,23 @@
 <div class="cp_calendar">
-  <div>this is calendar</div>
+  <header>
+    <span class="prev">{{"<"}}</span>
+    <span class="month_btn">Jul 2019</span>
+    <span class="prev">{{">"}}</span>
+  </header>
+  <div class="week">
+    <span
+      class="cell day_header"
+      v-for="weekName in weekDays"
+    >
+      {{weekName}}
+    </span>
+  </div>
+  <div class="day">
+    <span
+      class="cell day_header"
+      v-for="day in 30"
+    >
+      {{day}}
+    </span>
+  </div>
 </div>
