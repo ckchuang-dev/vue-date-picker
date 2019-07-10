@@ -2,18 +2,32 @@
   export default {
     name: 'Calendar',
     props: {
-      date: {
-        type: String,
-        default: null
-      },
-      onSelect: {
-        type: Function,
-        required: true
-      }
+      // date: {
+      //   type: String,
+      //   default: null
+      // },
+      // onSelect: {
+      //   type: Function,
+      //   required: true
+      // }
     },
     data() {
       return {
-        weekDays: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+        weekNames: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+        monthNames: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        year: 2019,
+        month: 6,
+        day: 10
+      }
+    },
+    computed: {
+      monthYearText() {
+        return `${this.monthNames[this.month]} ${this.year}`
+      },
+      daysInMonth() {
+        const year = this.year
+        const month = this.month
+        return /8|3|5|10/.test(month) ? 30 : month === 1 ? ((!(year % 4) && year % 100) || !(year % 400) ? 29 : 28) : 31
       }
     },
     methods: {
@@ -34,6 +48,15 @@
         if (w < 0) w = (w & (7 + 7)) % 7
         else w = w % 7
         return w
+      },
+      changeMonth(dir) {
+        if (dir) {
+          this.month = (this.month + 1) % 12
+          if (this.month === 0) this.year++
+        } else {
+          this.month = (this.month + 11) % 12
+          if (this.month === 11) this.year--
+        }
       }
     }
   }

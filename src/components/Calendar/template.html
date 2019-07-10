@@ -1,21 +1,21 @@
 <div class="cp_calendar">
   <header>
-    <span class="prev">{{"<"}}</span>
-    <span class="month_btn">Jul 2019</span>
-    <span class="prev">{{">"}}</span>
+    <span class="prev" @click="changeMonth(0)">{{"<"}}</span>
+    <span class="month_btn">{{monthYearText}}</span>
+    <span class="next" @click="changeMonth(1)">{{">"}}</span>
   </header>
   <div class="week">
     <span
       class="cell day_header"
-      v-for="weekName in weekDays"
+      v-for="name in weekNames"
     >
-      {{weekName}}
+      {{name}}
     </span>
   </div>
   <div class="day">
     <span
       class="cell day_header"
-      v-for="day in 30"
+      v-for="day in daysInMonth"
     >
       {{day}}
     </span>
