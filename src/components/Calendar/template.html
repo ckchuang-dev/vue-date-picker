@@ -1,25 +1,26 @@
 <div class="cp_calendar">
-  <header>
-    <span class="prev" @click="changeMonth(0)">{{"<"}}</span>
-    <span class="month_btn">{{monthYearText}}</span>
-    <span class="next" @click="changeMonth(1)">{{">"}}</span>
-  </header>
-  <div class="week">
-    <span
-      class="cell day_header"
-      v-for="name in weekNames"
-    >
-      {{name}}
-    </span>
-  </div>
-  <div class="day">
-    <div class="row" v-for="week in daysInMonth">
-      <span
-        class="cell day_body"
-        v-for="day in week"
-      >
-        {{day}}
-      </span>
+  <div class="container">
+    <header>
+      <button class="prev" @click="changeMonth(0)">{{"<"}}</button>
+      <span class="month_btn">{{monthYearText}}</span>
+      <button class="next" @click="changeMonth(1)">{{">"}}</button>
+    </header>
+    <div class="content">
+      <table class="date_table" cellspacing="0" cellpadding="0">
+        <tbody>
+          <tr>
+            <th v-for="name in weekNames">
+              {{name}}
+            </th>
+          </tr>
+          <tr v-for="week in daysInMonth">
+            <td v-for="day in week">
+              {{day}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
+
 </div>

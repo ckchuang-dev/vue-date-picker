@@ -1,2 +1,76 @@
 .cp_calendar {
+  position: relative;
+  width: 100%;
+  display: flex;
+  .container {
+    width: 300px;
+    justify-content: center;
+    margin: 0 auto;
+    border: 1px solid #e4e7ed;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+    background: #fff;
+    border-radius: 4px;
+    line-height: 30px;
+    color: #606266;
+    > header {
+      margin: 12px;
+      display: flex;
+      button {
+        flex: 1;
+        font-size: 20px;
+        color: #303133;
+        border: 0;
+        background: transparent;
+        cursor: pointer;
+        outline: none;
+      }
+      > span {
+        flex: 8;
+      }
+    }
+    .content {
+      position: relative;
+      margin: 15px;
+      table {
+        display: table;
+        table-layout: fixed;
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 2px;
+        border-color: grey;
+      }
+      tbody {
+        display: table-row-group;
+        vertical-align: middle;
+        border-color: inherit;
+      }
+      tr {
+        display: table-row;
+        vertical-align: inherit;
+        border-color: inherit;
+      }
+      th {
+        padding: 5px;
+        color: #606266;
+        font-weight: 400;
+        border-bottom: 1px solid #ebeef5;
+        display: table-cell;
+        vertical-align: inherit;
+        font-weight: bold;
+      }
+      td {
+        width: 32px;
+        height: 30px;
+        padding: 4px 0;
+        box-sizing: border-box;
+        text-align: center;
+        cursor: pointer;
+        position: relative;
+      }
+      .date_table {
+        font-size: 12px;
+        user-select: none;
+      }
+    }
+  }
 }
