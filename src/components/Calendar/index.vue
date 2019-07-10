@@ -25,9 +25,40 @@
         return `${this.monthNames[this.month]} ${this.year}`
       },
       daysInMonth() {
+        const arr = []
         const year = this.year
         const month = this.month
-        return /8|3|5|10/.test(month) ? 30 : month === 1 ? ((!(year % 4) && year % 100) || !(year % 400) ? 29 : 28) : 31
+        const currentDayCount = this.countDaysInMonth(year, month)
+        let prevDayCount = 0
+        if (month === 0) {
+          prevDayCount = this.countDaysInMonth(year - 1, 11)
+        } else {
+          prevDayCount = this.countDaysInMonth(year, month - 1)
+        }
+        const firstDay = this.zellerCongruence(year, month + 1, 1)
+        let startDay = 1
+        let nextStartDay = 1
+        for (let i = 0; i < 6; i++) {
+          let row = []
+          if (i === 0) {
+            for (let j = 0; j < 7; j++) {
+              if (firstDay > j) row.push(prevDayCount - firstDay + j + 1)
+              else row.push(j - firstDay + 1)
+            }
+            startDay = row[6] + 1
+            arr.push(row)
+          } else {
+            for (let j = startDay; j < startDay + 7; j++) {
+              if (j <= currentDayCount) row.push(j)
+              else {
+                row.push(nextStartDay++)
+              }
+            }
+            startDay = row[6] + 1
+            arr.push(row)
+          }
+        }
+        return arr
       }
     },
     methods: {
@@ -57,6 +88,9 @@
           this.month = (this.month + 11) % 12
           if (this.month === 11) this.year--
         }
+      },
+      countDaysInMonth(year, month) {
+        return /8|3|5|10/.test(month) ? 30 : month === 1 ? ((!(year % 4) && year % 100) || !(year % 400) ? 29 : 28) : 31
       }
     }
   }

@@ -13,11 +13,13 @@
     </span>
   </div>
   <div class="day">
-    <span
-      class="cell day_header"
-      v-for="day in daysInMonth"
-    >
-      {{day}}
-    </span>
+    <div class="row" v-for="week in daysInMonth">
+      <span
+        class="cell day_body"
+        v-for="day in week"
+      >
+        {{day}}
+      </span>
+    </div>
   </div>
 </div>
