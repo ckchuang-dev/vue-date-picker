@@ -25,8 +25,11 @@
             </th>
           </tr>
           <tr v-for="week in daysInMonth">
-            <td v-for="day in week">
-              {{day}}
+            <td
+              v-for="date in week"
+              :class="{inactive: !date.active}"
+            >
+              {{date.value}}
             </td>
           </tr>
         </tbody>
@@ -63,6 +66,7 @@
             <td
               v-for="(r2, j) in 4"
               @click="selectYear(i, j)"
+              :class="{inactive: (i === 0 && j === 0) || (i === 2 && j === 3)}"
             >
               {{parseInt(`${Math.floor(year / 10)}0`) - 1 + i * 4 + j}}
             </td>

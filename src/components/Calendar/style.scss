@@ -11,7 +11,7 @@
     background: #fff;
     border-radius: 4px;
     line-height: 30px;
-    color: #606266;
+    color: #000;
     > header {
       margin: 12px;
       display: flex;
@@ -38,7 +38,7 @@
         width: 100%;
         border-collapse: separate;
         border-spacing: 2px;
-        border-color: grey;
+        border-color: #e4e7ed;
       }
       tbody {
         display: table-row-group;
@@ -52,7 +52,6 @@
       }
       th {
         padding: 5px;
-        color: #606266;
         font-weight: 400;
         border-bottom: 1px solid #ebeef5;
         display: table-cell;
@@ -67,6 +66,9 @@
         text-align: center;
         cursor: pointer;
         position: relative;
+        &.inactive {
+          color: #aaa;
+        }
       }
       .date_table {
         font-size: 12px;

@@ -61,19 +61,35 @@
           let row = []
           if (i === 0) {
             for (let j = 0; j < 7; j++) {
-              if (firstDay > j) row.push(prevDayCount - firstDay + j + 1)
-              else row.push(j - firstDay + 1)
+              if (firstDay > j) {
+                row.push({
+                  value: prevDayCount - firstDay + j + 1,
+                  active: false
+                })
+              } else {
+                row.push({
+                  value: j - firstDay + 1,
+                  active: true
+                })
+              }
             }
-            startDay = row[6] + 1
+            startDay = row[6].value + 1
             arr.push(row)
           } else {
             for (let j = startDay; j < startDay + 7; j++) {
-              if (j <= currentDayCount) row.push(j)
-              else {
-                row.push(nextStartDay++)
+              if (j <= currentDayCount && nextStartDay === 1) {
+                row.push({
+                  value: j,
+                  active: true
+                })
+              } else {
+                row.push({
+                  value: nextStartDay++,
+                  active: false
+                })
               }
             }
-            startDay = row[6] + 1
+            startDay = row[6].value + 1
             arr.push(row)
           }
         }
