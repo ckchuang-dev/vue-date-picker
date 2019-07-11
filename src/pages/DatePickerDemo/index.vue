@@ -7,8 +7,8 @@
     },
     data() {
       return {
-        currentDate: null,
-        selectedDate: null
+        selectedDate: null,
+        open: false
       }
     },
     computed: {
@@ -20,16 +20,26 @@
     methods: {
       onSelect(date) {
         this.selectedDate = date
+        this.open = false
+      },
+      onKeyupEnter(e) {
+        const text = e.target.value
+        this.selectedDate = {
+          year: parseInt(text.slice(0, 4)),
+          month: parseInt(text.slice(5, 7)) - 1,
+          day: parseInt(text.slice(8, 10))
+        }
+        this.open = false
       }
     },
     beforeMount() {
       const now = new Date().toISOString()
-      this.currentDate = {
+      const currentDate = {
         year: parseInt(now.slice(0, 4)),
         month: parseInt(now.slice(5, 7)) - 1,
         day: parseInt(now.slice(8, 10))
       }
-      this.selectedDate = JSON.parse(JSON.stringify(this.currentDate))
+      this.selectedDate = JSON.parse(JSON.stringify(currentDate))
     }
   }
 </script>

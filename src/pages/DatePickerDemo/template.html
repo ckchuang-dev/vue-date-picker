@@ -1,7 +1,15 @@
 <div id="pg_date_picker_demo">
-  <input type="date">
+  <input
+    type="text"
+    autocomplete="off"
+    placeholder="Choose a date..."
+    :value="dateText"
+    @keyup.13="onKeyupEnter"
+    @click="open = true"
+  >
   <Calendar
-    :date="currentDate"
+    v-show="open"
+    :date="selectedDate"
     :onSelect="onSelect"
   />
 </div>

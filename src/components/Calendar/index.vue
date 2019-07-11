@@ -17,7 +17,6 @@
         weekNames: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
         monthNames: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
         displayDate: null,
-        selectedDate: null,
         currentDate: null
       }
     },
@@ -170,28 +169,28 @@
           if (date.value > 15) this.changeMonth(0)
           else this.changeMonth(1)
         }
-        this.selectedDate.day = date.value
-        this.selectedDate.month = this.displayDate.month
-        this.selectedDate.year = this.displayDate.year
-        this.onSelect(this.selectedDate)
+        this.date.day = date.value
+        this.date.month = this.displayDate.month
+        this.date.year = this.displayDate.year
+        this.onSelect(this.date)
       },
       checkSelectedDate(date) {
         const dy = this.displayDate.year
         const dm = this.displayDate.month
-        const sy = this.selectedDate.year
-        const sm = this.selectedDate.month
-        const sd = this.selectedDate.day
+        const sy = this.date.year
+        const sm = this.date.month
+        const sd = this.date.day
         return date.value === sd && date.active && dy === sy && dm === sm
       },
       checkSelectedMonth(index) {
         const dy = this.displayDate.year
-        const sy = this.selectedDate.year
-        const sm = this.selectedDate.month
+        const sy = this.date.year
+        const sm = this.date.month
         return sm === index && sy === dy
       },
       checkSelectedYear(i, j) {
         const dy = this.displayDate.year
-        const sy = this.selectedDate.year
+        const sy = this.date.year
         return parseInt(`${Math.floor(dy / 10)}0`) - 1 + i * 4 + j === sy
       },
       checkCurrentDate(date) {
@@ -221,13 +220,8 @@
         month: parseInt(now.slice(5, 7)) - 1,
         day: parseInt(now.slice(8, 10))
       }
-      if (this.date) {
-        this.selectedDate = JSON.parse(JSON.stringify(this.date))
-        this.displayDate = JSON.parse(JSON.stringify(this.date))
-      } else {
-        this.selectedDate = JSON.parse(JSON.stringify(this.currentDate))
-        this.displayDate = JSON.parse(JSON.stringify(this.currentDate))
-      }
+      if (this.date) this.displayDate = JSON.parse(JSON.stringify(this.date))
+      else this.displayDate = JSON.parse(JSON.stringify(this.currentDate))
     }
   }
 </script>
