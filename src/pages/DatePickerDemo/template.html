@@ -2,9 +2,9 @@
   <input
     type="text"
     autocomplete="off"
-    placeholder="Choose a date..."
+    placeholder="YYYY-MM-DD"
     :value="dateText"
-    @keyup.13="onKeyupEnter"
+    @keyup.enter="onKeyupEnter"
     @click="open = true"
   >
   <Calendar
