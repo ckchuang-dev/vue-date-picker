@@ -139,6 +139,15 @@
       },
       countDaysInMonth(year, month) {
         return /8|3|5|10/.test(month) ? 30 : month === 1 ? ((!(year % 4) && year % 100) || !(year % 400) ? 29 : 28) : 31
+      },
+      selectYear(i, j) {
+        this.year = parseInt(`${Math.floor(this.year / 10)}0`) - 1 + i * 4 + j
+        this.selectedTableId = 2
+      },
+      selectMonth(name) {
+        const index = this.monthNames.indexOf(name)
+        this.month = index < 0 ? this.month : index
+        this.selectedTableId = 1
       }
     }
   }

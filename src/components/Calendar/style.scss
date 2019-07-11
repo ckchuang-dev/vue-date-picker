@@ -15,17 +15,18 @@
     > header {
       margin: 12px;
       display: flex;
+      font-size: 20px;
+      background: transparent;
       button {
         flex: 1;
-        font-size: 20px;
-        color: #303133;
         border: 0;
-        background: transparent;
         cursor: pointer;
         outline: none;
       }
-      > span {
+      .month_btn {
         flex: 8;
+        cursor: pointer;
+        outline: none;
       }
     }
     .content {
