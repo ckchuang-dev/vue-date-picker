@@ -27,8 +27,8 @@
           <tr v-for="week in daysInMonth">
             <td
               v-for="date in week"
-              :class="{inactive: !date.active, selected: checkDateSelectStatus(date)}"
-              @click="onSelect(date)"
+              :class="{inactive: !date.active, selected: checkSelectedDate(date)}"
+              @click="selectDate(date)"
             >
               {{date.value}}
             </td>
@@ -46,7 +46,8 @@
         <tbody>
           <tr v-for="(r, i) in 3">
             <td
-              v-for="monthName in monthNames.slice(i * 4, (i+1) * 4)"
+              v-for="(monthName, j) in monthNames.slice(i * 4, (i+1) * 4)"
+              :class="{selected: checkSelectedMonth(i * 4 + j)}"
               @click="selectMonth(monthName)"
             >
               {{monthName}}
@@ -67,9 +68,9 @@
             <td
               v-for="(r2, j) in 4"
               @click="selectYear(i, j)"
-              :class="{inactive: (i === 0 && j === 0) || (i === 2 && j === 3)}"
+              :class="{inactive: (i === 0 && j === 0) || (i === 2 && j === 3), selected: checkSelectedYear(i, j)}"
             >
-              {{parseInt(`${Math.floor(year / 10)}0`) - 1 + i * 4 + j}}
+              {{parseInt(`${Math.floor(displayDate.year / 10)}0`) - 1 + i * 4 + j}}
             </td>
           </tr>
         </tbody>

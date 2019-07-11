@@ -16,22 +16,17 @@
         selectedTableId: 1,
         weekNames: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
         monthNames: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-        year: 2019,
-        month: 6,
-        day: 10,
-        selectedDate: {
-          year: 2019,
-          month: 6,
-          day: 10
-        }
+        displayDate: null,
+        selectedDate: null,
+        currentDate: null
       }
     },
     computed: {
       monthYearText() {
-        return `${this.monthNames[this.month]} ${this.year}`
+        return `${this.monthNames[this.displayDate.month]} ${this.displayDate.year}`
       },
       tenYearsText() {
-        const year = this.year
+        const year = this.displayDate.year
         const c = Math.floor(year / 10) // 年份前三位數
         return c ? `${c}0 - ${c}9` : '0 - 9'
       },
@@ -41,7 +36,7 @@
           case 1:
             return this.monthYearText
           case 2:
-            return this.year
+            return this.displayDate.year
           case 3:
             return this.tenYearsText
           default:
@@ -50,8 +45,8 @@
       },
       daysInMonth() {
         const arr = []
-        const year = this.year
-        const month = this.month
+        const year = this.displayDate.year
+        const month = this.displayDate.month
         const currentDayCount = this.countDaysInMonth(year, month)
         let prevDayCount = 0
         if (month === 0) {
@@ -140,10 +135,10 @@
             this.changeMonth(dir)
             break
           case 2:
-            dir ? this.year++ : this.year--
+            dir ? this.displayDate.year++ : this.displayDate.year--
             break
           case 3:
-            dir ? (this.year += 10) : (this.year -= 10)
+            dir ? (this.displayDate.year += 10) : (this.displayDate.year -= 10)
             break
           default:
             break
@@ -151,41 +146,62 @@
       },
       changeMonth(dir) {
         if (dir) {
-          this.month = (this.month + 1) % 12
-          if (this.month === 0) this.year++
+          this.displayDate.month = (this.displayDate.month + 1) % 12
+          if (this.displayDate.month === 0) this.displayDate.year++
         } else {
-          this.month = (this.month + 11) % 12
-          if (this.month === 11) this.year--
+          this.displayDate.month = (this.displayDate.month + 11) % 12
+          if (this.displayDate.month === 11) this.displayDate.year--
         }
       },
       countDaysInMonth(year, month) {
         return /8|3|5|10/.test(month) ? 30 : month === 1 ? ((!(year % 4) && year % 100) || !(year % 400) ? 29 : 28) : 31
       },
       selectYear(i, j) {
-        this.year = parseInt(`${Math.floor(this.year / 10)}0`) - 1 + i * 4 + j
+        this.displayDate.year = parseInt(`${Math.floor(this.displayDate.year / 10)}0`) - 1 + i * 4 + j
         this.selectedTableId = 2
       },
       selectMonth(name) {
         const index = this.monthNames.indexOf(name)
-        this.month = index < 0 ? this.month : index
+        this.displayDate.month = index < 0 ? this.displayDate.month : index
         this.selectedTableId = 1
       },
-      onSelect(date) {
+      selectDate(date) {
         // TODO: 整理資料結構，做點擊上下月日期可以切過去對應月曆
         if (date.active) {
-          this.selectedDate = {
-            year: this.year,
-            month: this.month,
-            day: date.value
-          }
+          this.selectedDate.day = date.value
+          this.selectedDate.month = this.displayDate.month
+          this.selectedDate.year = this.displayDate.year
         }
       },
-      checkDateSelectStatus(date) {
-        const y = this.selectedDate.year
-        const m = this.selectedDate.month
-        const d = this.selectedDate.day
-        return date.value === d && date.active && this.month === m && this.year === y
+      checkSelectedDate(date) {
+        const dy = this.displayDate.year
+        const dm = this.displayDate.month
+        const sy = this.selectedDate.year
+        const sm = this.selectedDate.month
+        const sd = this.selectedDate.day
+        return date.value === sd && date.active && dy === sy && dm === sm
+      },
+      checkSelectedMonth(index) {
+        const dy = this.displayDate.year
+        const sy = this.selectedDate.year
+        const sm = this.selectedDate.month
+        return sm === index && sy === dy
+      },
+      checkSelectedYear(i, j) {
+        const dy = this.displayDate.year
+        const sy = this.selectedDate.year
+        return parseInt(`${Math.floor(dy / 10)}0`) - 1 + i * 4 + j === sy
       }
+    },
+    beforeMount() {
+      const now = new Date().toISOString()
+      this.currentDate = {
+        year: parseInt(now.slice(0, 4)),
+        month: parseInt(now.slice(5, 7)) - 1,
+        day: parseInt(now.slice(8, 10))
+      }
+      this.selectedDate = JSON.parse(JSON.stringify(this.currentDate))
+      this.displayDate = JSON.parse(JSON.stringify(this.currentDate))
     }
   }
 </script>
