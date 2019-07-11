@@ -166,12 +166,13 @@
         this.selectedTableId = 1
       },
       selectDate(date) {
-        // TODO: 整理資料結構，做點擊上下月日期可以切過去對應月曆
-        if (date.active) {
-          this.selectedDate.day = date.value
-          this.selectedDate.month = this.displayDate.month
-          this.selectedDate.year = this.displayDate.year
+        if (!date.active) {
+          if (date.value > 15) this.changeMonth(0)
+          else this.changeMonth(1)
         }
+        this.selectedDate.day = date.value
+        this.selectedDate.month = this.displayDate.month
+        this.selectedDate.year = this.displayDate.year
       },
       checkSelectedDate(date) {
         const dy = this.displayDate.year
