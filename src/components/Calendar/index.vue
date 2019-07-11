@@ -191,6 +191,25 @@
         const dy = this.displayDate.year
         const sy = this.selectedDate.year
         return parseInt(`${Math.floor(dy / 10)}0`) - 1 + i * 4 + j === sy
+      },
+      checkCurrentDate(date) {
+        const dy = this.displayDate.year
+        const dm = this.displayDate.month
+        const cy = this.currentDate.year
+        const cm = this.currentDate.month
+        const cd = this.currentDate.day
+        return date.value === cd && date.active && dy === cy && dm === cm && !this.checkSelectedDate(date)
+      },
+      checkCurrentMonth(index) {
+        const dy = this.displayDate.year
+        const cy = this.currentDate.year
+        const cm = this.currentDate.month
+        return cm === index && cy === dy && !this.checkSelectedMonth(index)
+      },
+      checkCurrentYear(i, j) {
+        const dy = this.displayDate.year
+        const cy = this.currentDate.year
+        return parseInt(`${Math.floor(dy / 10)}0`) - 1 + i * 4 + j === cy && !this.checkSelectedYear(i, j)
       }
     },
     beforeMount() {
