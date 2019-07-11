@@ -1,12 +1,17 @@
 <div class="cp_calendar">
   <div class="container">
     <header>
-      <button class="prev" @click="changeMonth(0)">{{"<"}}</button>
-      <span class="month_btn">{{monthYearText}}</span>
-      <button class="next" @click="changeMonth(1)">{{">"}}</button>
+      <button class="prev" @click="changePeriod(0)">{{"<"}}</button>
+      <span class="month_btn" @click="changeTable">{{headerText}}</span>
+      <button class="next" @click="changePeriod(1)">{{">"}}</button>
     </header>
     <div class="content">
-      <table class="date_table" cellspacing="0" cellpadding="0">
+      <table
+        v-show="selectedTableId === 1"
+        class="date_table"
+        cellspacing="0"
+        cellpadding="0"
+      >
         <tbody>
           <tr>
             <th v-for="name in weekNames">
@@ -16,6 +21,34 @@
           <tr v-for="week in daysInMonth">
             <td v-for="day in week">
               {{day}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table
+        v-show="selectedTableId === 2"
+        class="month_table"
+        cellspacing="0"
+        cellpadding="0"
+      >
+        <tbody>
+          <tr v-for="(row, index) in 3">
+            <td v-for="name in monthNames.slice(index * 4, (index+1) * 4)">
+              {{name}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table
+        v-show="selectedTableId === 3"
+        class="year_table"
+        cellspacing="0"
+        cellpadding="0"
+      >
+        <tbody>
+          <tr v-for="(r1, i) in 3">
+            <td v-for="(r2, j) in 4">
+              {{parseInt(`${Math.floor(year / 10)}0`) - 1 + i * 4 + j}}
             </td>
           </tr>
         </tbody>

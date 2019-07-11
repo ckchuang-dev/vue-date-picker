@@ -13,6 +13,7 @@
     },
     data() {
       return {
+        selectedTableId: 1,
         weekNames: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
         monthNames: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
         year: 2019,
@@ -23,6 +24,24 @@
     computed: {
       monthYearText() {
         return `${this.monthNames[this.month]} ${this.year}`
+      },
+      tenYearsText() {
+        const year = this.year
+        const c = Math.floor(year / 10) // 年份前三位數
+        return c ? `${c}0 - ${c}9` : '0 - 9'
+      },
+      headerText() {
+        const tableId = this.selectedTableId
+        switch (tableId) {
+          case 1:
+            return this.monthYearText
+          case 2:
+            return this.year
+          case 3:
+            return this.tenYearsText
+          default:
+            return ''
+        }
       },
       daysInMonth() {
         const arr = []
@@ -79,6 +98,35 @@
         if (w < 0) w = (w & (7 + 7)) % 7
         else w = w % 7
         return w
+      },
+      changeTable() {
+        const tableId = this.selectedTableId
+        switch (tableId) {
+          case 1:
+            this.selectedTableId = 2
+            break
+          case 2:
+            this.selectedTableId = 3
+            break
+          default:
+            break
+        }
+      },
+      changePeriod(dir) {
+        const tableId = this.selectedTableId
+        switch (tableId) {
+          case 1:
+            this.changeMonth(dir)
+            break
+          case 2:
+            dir ? this.year++ : this.year--
+            break
+          case 3:
+            dir ? (this.year += 10) : (this.year -= 10)
+            break
+          default:
+            break
+        }
       },
       changeMonth(dir) {
         if (dir) {
