@@ -69,6 +69,11 @@
         &.inactive {
           color: #aaa;
         }
+        &.selected {
+          color: #fff;
+          background-color: #db3d44;
+          border-radius: 50px;
+        }
       }
       .date_table {
         font-size: 12px;

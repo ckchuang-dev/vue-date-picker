@@ -18,7 +18,12 @@
         monthNames: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
         year: 2019,
         month: 6,
-        day: 10
+        day: 10,
+        selectedDate: {
+          year: 2019,
+          month: 6,
+          day: 10
+        }
       }
     },
     computed: {
@@ -164,6 +169,22 @@
         const index = this.monthNames.indexOf(name)
         this.month = index < 0 ? this.month : index
         this.selectedTableId = 1
+      },
+      onSelect(date) {
+        // TODO: 整理資料結構，做點擊上下月日期可以切過去對應月曆
+        if (date.active) {
+          this.selectedDate = {
+            year: this.year,
+            month: this.month,
+            day: date.value
+          }
+        }
+      },
+      checkDateSelectStatus(date) {
+        const y = this.selectedDate.year
+        const m = this.selectedDate.month
+        const d = this.selectedDate.day
+        return date.value === d && date.active && this.month === m && this.year === y
       }
     }
   }

@@ -27,7 +27,8 @@
           <tr v-for="week in daysInMonth">
             <td
               v-for="date in week"
-              :class="{inactive: !date.active}"
+              :class="{inactive: !date.active, selected: checkDateSelectStatus(date)}"
+              @click="onSelect(date)"
             >
               {{date.value}}
             </td>
