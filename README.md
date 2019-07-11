@@ -1,4 +1,4 @@
-# calendar-and-datepicker
+# Calendar and DatePicker
 
 ## Project setup
 ```
@@ -10,20 +10,15 @@ yarn install
 yarn run serve
 ```
 
-### Compiles and minifies for production
-```
-yarn run build
-```
+### Demo page run at:
+- [http://localhost:8080/](http://localhost:8080/)
 
-### Run your tests
-```
-yarn run test
-```
 
-### Lints and fixes files
-```
-yarn run lint
-```
+## Main project structure
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- /src
+  - components
+    - Calendar: Reusable calendar component for each demo page
+  - pages
+    - CalendarDemo: Demo page for task 1
+    - DatePickerDemo: Demo page for task 2
