@@ -2,14 +2,14 @@
   export default {
     name: 'Calendar',
     props: {
-      // date: {
-      //   type: String,
-      //   default: null
-      // },
-      // onSelect: {
-      //   type: Function,
-      //   required: true
-      // }
+      date: {
+        type: Object,
+        default: null
+      },
+      onSelect: {
+        type: Function,
+        required: true
+      }
     },
     data() {
       return {
@@ -173,6 +173,7 @@
         this.selectedDate.day = date.value
         this.selectedDate.month = this.displayDate.month
         this.selectedDate.year = this.displayDate.year
+        this.onSelect(this.selectedDate)
       },
       checkSelectedDate(date) {
         const dy = this.displayDate.year
@@ -220,8 +221,13 @@
         month: parseInt(now.slice(5, 7)) - 1,
         day: parseInt(now.slice(8, 10))
       }
-      this.selectedDate = JSON.parse(JSON.stringify(this.currentDate))
-      this.displayDate = JSON.parse(JSON.stringify(this.currentDate))
+      if (this.date) {
+        this.selectedDate = JSON.parse(JSON.stringify(this.date))
+        this.displayDate = JSON.parse(JSON.stringify(this.date))
+      } else {
+        this.selectedDate = JSON.parse(JSON.stringify(this.currentDate))
+        this.displayDate = JSON.parse(JSON.stringify(this.currentDate))
+      }
     }
   }
 </script>

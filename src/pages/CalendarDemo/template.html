@@ -1,3 +1,7 @@
 <div id="pg_calendar_demo">
-  <Calendar/>
+  <h3>{{`Selected date: ${dateText}`}}</h3>
+  <Calendar
+    :date="currentDate"
+    :onSelect="onSelect"
+  />
 </div>
