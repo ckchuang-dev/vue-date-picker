@@ -13,7 +13,9 @@
     computed: {
       dateText() {
         const { year, month, day } = this.selectedDate
-        return `${year}-${month + 1}-${day}`
+        const zMonth = ('0' + (month + 1)).slice(-2)
+        const zDay = ('0' + day).slice(-2)
+        return `${year}-${zMonth}-${zDay}`
       }
     },
     methods: {

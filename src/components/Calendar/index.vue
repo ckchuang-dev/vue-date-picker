@@ -213,6 +213,11 @@
         return parseInt(`${Math.floor(dy / 10)}0`) - 1 + i * 4 + j === cy && !this.checkSelectedYear(i, j)
       }
     },
+    watch: {
+      date() {
+        if (this.date) this.displayDate = JSON.parse(JSON.stringify(this.date))
+      }
+    },
     beforeMount() {
       const now = new Date().toISOString()
       this.currentDate = {

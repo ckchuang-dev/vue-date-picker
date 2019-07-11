@@ -14,7 +14,9 @@
     computed: {
       dateText() {
         const { year, month, day } = this.selectedDate
-        return `${year}-${month + 1}-${day}`
+        const zMonth = ('0' + (month + 1)).slice(-2)
+        const zDay = ('0' + day).slice(-2)
+        return `${year}-${zMonth}-${zDay}`
       }
     },
     methods: {
@@ -24,6 +26,14 @@
       },
       onKeyupEnter(e) {
         const text = e.target.value
+
+        // TODO: error message
+        // 驗證輸入格式是否符合 YYYY-MM-DD
+        if (!/\d{4}-\d{2}-\d{2}/.test(text)) {
+          this.open = false
+          return false
+        }
+
         this.selectedDate = {
           year: parseInt(text.slice(0, 4)),
           month: parseInt(text.slice(5, 7)) - 1,
