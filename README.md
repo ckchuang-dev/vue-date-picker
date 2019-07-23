@@ -1,18 +1,28 @@
-# Calendar and DatePicker
+Calendar and DatePicker
+==
 
-## Project setup
+Date picker practice in Vue. Without any existing date-picker related packages.
+
+## Demo
+
+- [Live demo](https://dezchuang.github.io/vue-date-picker)
+
+## Local setup
+
+- Install packages
+
 ```
 yarn install
 ```
 
-### Compiles and hot-reloads for development
+- Compiles and hot-reloads for development
+-
 ```
 yarn run serve
 ```
 
-### Demo page run at:
-- [http://localhost:8080/](http://localhost:8080/)
-
+- Demo page run at:
+  - [http://localhost:8080/](http://localhost:8080/)
 
 ## Main project structure
 
