@@ -1,14 +1,39 @@
 <script>
   import Calendar from '@/components/Calendar'
+  let handleOutsideClick
   export default {
     name: 'DatePickerDemo',
     components: {
       Calendar
     },
+    directives: {
+      'click-outside': {
+        bind(el, { value }) {
+          const isFunction = typeof value === 'function'
+          if (!isFunction) {
+            throw new Error('v-click-outside: Binding value must be a function')
+          }
+          handleOutsideClick = event => {
+            const isClickOutside = event.target !== el && !el.contains(event.target)
+            if (isClickOutside) {
+              value(event)
+            }
+            event.stopPropagation()
+          }
+          document.addEventListener('click', handleOutsideClick)
+          document.addEventListener('touchstart', handleOutsideClick)
+        },
+        unbind() {
+          document.removeEventListener('click', handleOutsideClick)
+          document.removeEventListener('touchstart', handleOutsideClick)
+        }
+      }
+    },
     data() {
       return {
         selectedDate: null,
-        open: false
+        open: false,
+        inputDate: ''
       }
     },
     computed: {
@@ -22,15 +47,19 @@
     methods: {
       onSelect(date) {
         this.selectedDate = date
+        this.inputDate = this.dateText
+        this.onClose()
+      },
+      onClose() {
         this.open = false
       },
-      onKeyupEnter(e) {
-        const text = e.target.value
+      onKeyupEnter() {
+        const text = this.inputDate
 
         // TODO: error message
         // 驗證輸入格式是否符合 YYYY-MM-DD
         if (!/\d{4}-\d{2}-\d{2}/.test(text)) {
-          this.open = false
+          this.onClose()
           return false
         }
 
@@ -39,7 +68,7 @@
           month: parseInt(text.slice(5, 7)) - 1,
           day: parseInt(text.slice(8, 10))
         }
-        this.open = false
+        this.onClose()
       }
     },
     beforeMount() {

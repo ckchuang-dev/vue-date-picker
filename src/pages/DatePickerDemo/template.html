@@ -1,15 +1,17 @@
 <div id="pg_date_picker_demo">
-  <input
-    type="text"
-    autocomplete="off"
-    placeholder="YYYY-MM-DD"
-    :value="dateText"
-    @keyup.enter="onKeyupEnter"
-    @click="open = true"
-  >
-  <Calendar
-    v-show="open"
-    :date="selectedDate"
-    :onSelect="onSelect"
-  />
+  <div v-click-outside="onClose">
+    <input
+      type="text"
+      autocomplete="off"
+      placeholder="YYYY-MM-DD"
+      v-model="inputDate"
+      @keyup.enter="onKeyupEnter"
+      @click="open = true"
+    >
+    <Calendar
+      v-show="open"
+      :date="selectedDate"
+      :onSelect="onSelect"
+    />
+  </div>
 </div>
