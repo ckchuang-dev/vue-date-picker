@@ -9,16 +9,10 @@
     directives: {
       'click-outside': {
         bind(el, { value }) {
-          const isFunction = typeof value === 'function'
-          if (!isFunction) {
-            throw new Error('v-click-outside: Binding value must be a function')
-          }
-          handleOutsideClick = event => {
-            const isClickOutside = event.target !== el && !el.contains(event.target)
-            if (isClickOutside) {
-              value(event)
-            }
-            event.stopPropagation()
+          handleOutsideClick = e => {
+            const isClickOutside = e.target !== el && !el.contains(e.target)
+            if (isClickOutside) value(e)
+            e.stopPropagation()
           }
           document.addEventListener('click', handleOutsideClick)
           document.addEventListener('touchstart', handleOutsideClick)
