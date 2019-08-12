@@ -5,6 +5,8 @@ Date picker practice in Vue. Without any existing date-picker related packages.
 
 ## Demo
 
+![](https://miro.medium.com/max/337/1*QbyoS1zWvg3wWCg9KFXk-g.png)
+
 - [Live demo](https://dezchuang.github.io/vue-date-picker)
 
 ## Local setup
@@ -16,7 +18,7 @@ yarn install
 ```
 
 - Compiles and hot-reloads for development
--
+
 ```
 yarn run serve
 ```
